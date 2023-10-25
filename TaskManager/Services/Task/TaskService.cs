@@ -5,8 +5,8 @@ namespace TaskManager.Services.Task
 {
     public class TaskService : ITaskService
     {
-        private readonly ApplicationDbContext _context;
-        public TaskService(ApplicationDbContext context)
+        private readonly IApplicationDbContext _context;
+        public TaskService(IApplicationDbContext context)
         {
             _context = context;
         }

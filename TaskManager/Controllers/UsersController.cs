@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskManager.Models;
 using TaskManager.Services.User;
+using TaskManager.Services.User.Request;
 
 namespace TaskManager.Controllers
 {
@@ -14,7 +16,7 @@ namespace TaskManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public ActionResult GetAllUsers()
         {
             var users = _userService.GetAllUsers();
 
@@ -23,9 +25,17 @@ namespace TaskManager.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult FindProjectById([FromRoute] int Id)
+        public ActionResult FindUserById([FromRoute] int Id)
         {
             var user = _userService.FindUserById(Id);
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public ActionResult<User> CreateUser(CreateUser command)
+        {
+            var user = _userService.AddUser(command);
+
             return Ok(user);
         }
     }
